@@ -1,9 +1,3 @@
-export enum Challenges {
-  TRANSFER_PRIZE = 'transferPrize',
-  SWAP = 'swap', // token_launch
-  SHILLING = 'shilling',
-}
-
 export enum Role {
   SYSTEM = 'system',
   USER = 'user',

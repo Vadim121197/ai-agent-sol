@@ -1,7 +1,6 @@
 import Link from 'next/link';
 
 import { Routes } from '@/lib/routes';
-import { ConnectButton } from '@rainbow-me/rainbowkit';
 
 import { BorderWrapper } from '../../components/border-wrapper';
 
@@ -11,7 +10,6 @@ export const Header = () => {
       <Link href={Routes.MAIN} className='flex items-center text-sm font-semibold'>
         AGENT PLATFORM
       </Link>
-      <ConnectButton />
     </BorderWrapper>
   );
 };

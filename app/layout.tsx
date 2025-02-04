@@ -4,13 +4,12 @@ import { urbanistFont } from '@/lib/font';
 import { Header } from '@/modules/layout/header';
 import { Providers } from '@/modules/layout/providers';
 import { Sidebar } from '@/modules/layout/sidebar';
-import '@rainbow-me/rainbowkit/styles.css';
 
 import './globals.css';
 
 export const metadata: Metadata = {
-  title: 'Kira AI',
-  description: 'Kira AI',
+  title: 'Kaja AI',
+  description: 'Kaja AI',
 };
 
 export default function RootLayout({

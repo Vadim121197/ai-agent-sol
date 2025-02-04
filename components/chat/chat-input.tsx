@@ -6,31 +6,28 @@ import { BorderWrapper } from '@/components/border-wrapper';
 import { Textarea } from '@/components/ui/textarea';
 import { useSendMessage } from '@/hooks/use-send-message';
 import { cn } from '@/lib/utils';
-import { Challenges } from '@/types/chat';
-import { useAccount, useBalance } from 'wagmi';
 
 import { SendIcon } from './send-icon';
 
 const initialHeight = 56;
 
-export const ChatInput = ({ type }: { type: Challenges }) => {
+export const ChatInput = () => {
   const [textareaHeight, setTextareaHeight] = useState<number>(initialHeight);
-  const { address } = useAccount();
-  const { data: balance } = useBalance({
-    address,
-    query: {
-      enabled: Boolean(address),
-    },
-  });
+
+  const address: string | undefined = '';
+
+  const balance: { value: bigint } | null = {
+    value: BigInt(0),
+  };
 
   const textAreaRef = useRef<HTMLTextAreaElement | null>(null);
 
-  const { setMessage, sendMessage, message, messagePrice, isPending } = useSendMessage(type);
+  const { setMessage, sendMessage, message, messagePrice, isPending } = useSendMessage();
 
   const [focus, setFocus] = useState<boolean>(false);
 
   const sufficientBalance =
-    messagePrice && balance?.value && address ? messagePrice >= balance.value : true;
+    messagePrice && balance.value && address ? messagePrice >= balance.value : true;
 
   const handleChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
     const target = e.target;

@@ -2,15 +2,14 @@
 
 import { useSelectedChat } from '@/hooks/use-selected-chat';
 import { cn } from '@/lib/utils';
-import { Challenges, Role } from '@/types/chat';
+import { Role } from '@/types/chat';
 import { Calendar, UserRound } from 'lucide-react';
 import moment from 'moment';
 
 import { Skeleton } from '../ui/skeleton';
-import { firstMessage } from './contants';
 
-export const Messages = ({ type }: { type: Challenges }) => {
-  const { selectedChat, isFetched } = useSelectedChat(type);
+export const Messages = () => {
+  const { selectedChat, isFetched } = useSelectedChat();
 
   return (
     <div className='flex flex-1 flex-col-reverse max-h-screen overflow-y-auto'>
@@ -77,7 +76,7 @@ export const Messages = ({ type }: { type: Challenges }) => {
                   <p className='text-link-border text-base font-bold'>Chat</p>
                 </div>
               </div>
-              <p className='text-base font-medium break-words'>{firstMessage[type]}</p>
+              <p className='text-base font-medium break-words'>Forst message</p>
             </div>
           </div>
         )}
