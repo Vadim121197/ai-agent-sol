@@ -18,7 +18,7 @@ export const Messages = () => {
       <div className='scrollbar-thumb-black scrollbar-thumb-rounded scrollbar-w-2 scrolling-touch flex flex-col-reverse overflow-y-auto'>
         {(selectedChat ?? []).map(i => (
           <div key={i.date} className='flex flex-col pb-4'>
-            <div className='sticky top-0 my-4 flex justify-center z-10'>
+            <div className='sticky top-4 my-4 flex justify-center z-10'>
               <div className='flex items-center gap-1 border border-border rounded-sm bg-icon-bg px-4 py-1'>
                 <Calendar className='size-4 text-[#A8A1A7]' />
                 <p className='text-base font-medium text-[#A8A1A7]'>{i.date}</p>
@@ -78,7 +78,7 @@ export const Messages = () => {
           </div>
         ))}
         {isFetched && (
-          <div className={cn('flex w-full items-end', { 'pb-4': !selectedChat?.length })}>
+          <div className={cn('flex w-full items-end mt-6', { 'pb-4': !selectedChat?.length })}>
             {/* TODO add border 0.5px */}
             <div className='flex w-[75%] flex-col px-6 py-5 rounded-lg bg-[rgba(20,15,20,0.65)] border border-border gap-3 backdrop-blur-sm'>
               <div className='flex items-center justify-between'>
@@ -93,7 +93,9 @@ export const Messages = () => {
                   <p className='text-primary text-sm font-medium'>Kaja Agent</p>
                 </div>
               </div>
-              <p className='text-base font-medium text-card-foreground break-words'>First message</p>
+              <p className='text-base font-medium text-card-foreground break-words'>
+                First message
+              </p>
             </div>
           </div>
         )}

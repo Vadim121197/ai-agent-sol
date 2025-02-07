@@ -3,10 +3,12 @@ import { useState } from 'react';
 import { useToast } from '@/hooks/use-toast';
 import { chatsApi } from '@/lib/api/chats';
 import { infoApi } from '@/lib/api/info';
+import { useWallet } from '@solana/wallet-adapter-react';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 
 export const useSendMessage = () => {
   const { toast } = useToast();
+  const wallet = useWallet();
 
   const queryClient = useQueryClient();
 
@@ -31,12 +33,14 @@ export const useSendMessage = () => {
     },
   });
 
-  const messagePrice = BigInt(0);
-
   const sendMessage = () => {
+    const publicKey = wallet.publicKey?.toBase58();
+    if (!publicKey) {
+      return;
+    }
     mutate({
       message,
-      wallet: 'CHqVwNg4L44qVicjZWMA1dbsqa3wQXd9jBeZqvYVDE77',
+      wallet: publicKey,
     });
 
     setMessage('');
@@ -44,7 +48,6 @@ export const useSendMessage = () => {
 
   return {
     message,
-    messagePrice,
     isPending,
     sendMessage,
     setMessage,

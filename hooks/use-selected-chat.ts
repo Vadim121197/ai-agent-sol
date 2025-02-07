@@ -1,11 +1,14 @@
+import { useWallet } from '@solana/wallet-adapter-react';
 import { useQuery } from '@tanstack/react-query';
 
 import { chatsApi } from '../lib/api/chats';
 
 export function useSelectedChat() {
+  const wallet = useWallet();
+
   const { data: selectedChat, isFetched } = useQuery({
     ...chatsApi.getSelectedChatQueryOptions({
-      wallet: 'CHqVwNg4L44qVicjZWMA1dbsqa3wQXd9jBeZqvYVDE77',
+      wallet: wallet.publicKey?.toBase58(),
     }),
   });
 

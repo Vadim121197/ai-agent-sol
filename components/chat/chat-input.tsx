@@ -13,20 +13,11 @@ const initialHeight = 56;
 export const ChatInput = () => {
   const [textareaHeight, setTextareaHeight] = useState<number>(initialHeight);
 
-  const address: string | undefined = '';
-
-  const balance: { value: bigint } | null = {
-    value: BigInt(0),
-  };
-
   const textAreaRef = useRef<HTMLTextAreaElement | null>(null);
 
-  const { setMessage, sendMessage, message, messagePrice, isPending } = useSendMessage();
+  const { setMessage, sendMessage, message, isPending } = useSendMessage();
 
   const [focus, setFocus] = useState<boolean>(false);
-
-  const sufficientBalance =
-    messagePrice && balance.value && address ? messagePrice >= balance.value : true;
 
   const handleChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
     const target = e.target;
@@ -36,6 +27,7 @@ export const ChatInput = () => {
     target.style.height = `${newHeight}px`;
     setTextareaHeight(newHeight);
   };
+  const disabled = !message.trim() || isPending;
 
   return (
     <div
@@ -58,7 +50,7 @@ export const ChatInput = () => {
           textareaHeight > initialHeight ? 'leading-normal' : 'leading-[56px]',
         )}
         onKeyDown={e => {
-          if (isPending) {
+          if (disabled) {
             return;
           }
           if (e.key === 'Enter' && !e.shiftKey) {
@@ -77,7 +69,7 @@ export const ChatInput = () => {
           sendMessage();
           setTextareaHeight(initialHeight);
         }}
-        disabled={!message || sufficientBalance || isPending}
+        disabled={disabled}
         className={cn(
           'flex h-8 bg-[#EB11D1] items-center justify-center rounded-sm px-2 disabled:opacity-40',
           focus && message && '',
