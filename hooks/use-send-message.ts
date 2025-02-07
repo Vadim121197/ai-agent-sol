@@ -36,7 +36,7 @@ export const useSendMessage = () => {
   const sendMessage = () => {
     mutate({
       message,
-      wallet: '0x',
+      wallet: 'CHqVwNg4L44qVicjZWMA1dbsqa3wQXd9jBeZqvYVDE77',
     });
 
     setMessage('');

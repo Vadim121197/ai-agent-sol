@@ -37,23 +37,30 @@ export const chatsApi = {
       });
     }
 
-    await jsonApiInstance(`${ApiRoutes.CHAT_SELECTED}?wallet_address=${wallet}`, {
-      method: 'POST',
-      json: {
-        message,
-        timestamp: Date.now(),
-        transaction_hash: '',
-        context_data: {},
+    await jsonApiInstance(
+      `${ApiRoutes.CHAT_SELECTED}?wallet_address=${wallet}&action_param=shilling`,
+      {
+        method: 'POST',
+        json: {
+          message,
+          timestamp: Date.now(),
+          transaction_hash: '',
+          context_data: {},
+          payment_type: 'solana',
+        },
       },
-    });
+    );
   },
   getSelectedChatQueryOptions: ({ wallet }: { wallet?: string }) => {
     return queryOptions({
       queryKey: [chatsApi.baseQueryKey, 'selected', { wallet }],
       queryFn: meta =>
-        jsonApiInstance<Chat>(`${ApiRoutes.CHAT_SELECTED}?&wallet_address=${wallet}`, {
-          signal: meta.signal,
-        }),
+        jsonApiInstance<Chat>(
+          `${ApiRoutes.CHAT_SELECTED}?&wallet_address=${wallet}&action_param=shilling`,
+          {
+            signal: meta.signal,
+          },
+        ),
       enabled: Boolean(wallet),
       select: result => {
         const array: {
