@@ -26,8 +26,9 @@ export default function RootLayout({
             <div className='flex flex-1'>
               <div className='mx-auto flex flex-1 flex-col justify-between px-0'>
                 {/* 52px - header, 16px - gap, 16px - pt, 12px - pb */}
-                {/* max-h-[calc(100vh-62px-16px-12px-20px)]  */}
-                <div className='flex flex-1 max-h-[calc(100vh-52px-16px-16px-12px)]'>{children}</div>
+                <div className='flex flex-1 max-h-[calc(100vh-52px-16px-16px-12px)]'>
+                  {children}
+                </div>
               </div>
             </div>
           </div>

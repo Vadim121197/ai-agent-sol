@@ -6,7 +6,7 @@ import { usePathname } from 'next/navigation';
 import { Route, Routes } from '@/lib/routes';
 import { cn } from '@/lib/utils';
 
-export const SidebarLink = ({ route }: { route: Route }) => {
+export const NavigationLink = ({ route }: { route: Route }) => {
   const pathname = usePathname() as Routes;
 
   const selected = pathname === route.href;
@@ -17,12 +17,12 @@ export const SidebarLink = ({ route }: { route: Route }) => {
         key={route.href}
         href={route.href}
         className={cn(
-          'flex items-center gap-2 p-3 rounded-sm',
-          selected && 'bg-link-selected font-semibold border-l border-link-border',
+          'flex items-center gap-[10px] rounded-[20px] text-[#A8A1A7] px-3 py-1 text-base font-medium',
+          selected && 'bg-[#3B2839] font-semibold text-[#FFF] backdrop-blur-[2px] shadow-[0px_4px_4px_0px_rgba(0,0,0,0.25)]',
         )}
       >
-        <div className='size-5'>{route.icon}</div>
-        <p className='text-base font-medium capitalize'>{route.title}</p>
+        <div>{route.icon}</div>
+        <p className='text-base font-semibold capitalize'>{route.title}</p>
       </Link>
     );
   }

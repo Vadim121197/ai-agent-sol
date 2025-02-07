@@ -66,7 +66,7 @@ export const Messages = () => {
                           <Skeleton className='h-4 w-[250px]' />
                         </div>
                       ) : (
-                        <p className='text-sm font-medium text-card-foreground break-words'>
+                        <p className='text-base font-medium text-card-foreground break-words'>
                           {message.content}
                         </p>
                       )}
@@ -93,7 +93,7 @@ export const Messages = () => {
                   <p className='text-primary text-sm font-medium'>Kaja Agent</p>
                 </div>
               </div>
-              <p className='text-sm font-medium text-card-foreground break-words'>First message</p>
+              <p className='text-base font-medium text-card-foreground break-words'>First message</p>
             </div>
           </div>
         )}

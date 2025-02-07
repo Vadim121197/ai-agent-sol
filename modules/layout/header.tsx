@@ -1,14 +1,11 @@
 'use client';
 
-import dynamic from 'next/dynamic';
 import Link from 'next/link';
 
+import { ConnectButton } from '@/components/connect-button';
 import { Routes } from '@/lib/routes';
 
-const WalletMultiButtonDynamic = dynamic(
-  async () => (await import('@solana/wallet-adapter-react-ui')).WalletMultiButton,
-  { ssr: false },
-);
+import { Navigation } from './navigation';
 
 export const Header = () => {
   return (
@@ -20,8 +17,8 @@ export const Header = () => {
         Kaja AGENT
       </Link>
       <div className='flex items-center justify-between flex-1'>
-        <div>Navigation</div>
-        <WalletMultiButtonDynamic />
+        <Navigation />
+        <ConnectButton />
       </div>
     </div>
   );

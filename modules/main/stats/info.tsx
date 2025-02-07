@@ -4,9 +4,9 @@ import { BadgeDollarSign, Banknote, ChartArea, ChartCandlestick, Mail } from 'lu
 
 export const Info = () => {
   return (
-    <div className='flex gap-[6px] flex-col'>
-      <p className='text-sm font-medium'>Information</p>
-      <div className='grid grid-cols-2 gap-x-5 gap-y-[10px] w-full'>
+    <div className='flex gap-1 flex-col'>
+      <p className='text-base font-medium'>Information</p>
+      <div className='grid grid-cols-2 gap-x-5 gap-y-2 w-full'>
         <div className='flex items-center gap-2 border border-border rounded-lg p-[18px]'>
           <div className='border border-border rounded-full p-[10px] bg-icon-bg'>
             <Mail className='size-3 stroke-[1.5px]' />

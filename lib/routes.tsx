@@ -1,6 +1,6 @@
 import { ReactElement } from 'react';
 
-import { LayoutDashboard, MessageCircleQuestion, ReceiptText, Trophy } from 'lucide-react';
+import { ArrowLeftRight, MessageCircle, MessageCircleQuestion, ReceiptText } from 'lucide-react';
 
 export interface Route {
   href: Routes;
@@ -12,43 +12,34 @@ export interface Route {
 
 export enum Routes {
   MAIN = '/',
-  CHALLENGES = '/challenges',
+  TRANSACTIONS = '/txs',
   FAQ = '/faq',
   TERMS = '/terms',
-  SHILL_ME_MEME = '/shill_me_meme',
 }
 
-export const sidebarRoutes: Route[] = [
+export const routes: Route[] = [
   {
-    title: 'home',
+    title: 'chat',
     href: Routes.MAIN,
     active: true,
-    icon: <LayoutDashboard className='size-inherit' />,
+    icon: <MessageCircle className='size-[18px]' />,
   },
   {
-    // title: 'challenges',
-    title: 'Explorer Prize Pool',
-    href: Routes.CHALLENGES,
-    active: true,
-    icon: <Trophy className='size-inherit' />,
-  },
-
-  {
-    title: 'Shill me MEME',
-    href: Routes.SHILL_ME_MEME,
-    active: true,
-    icon: <Trophy className='size-inherit' />,
+    title: 'transactions',
+    href: Routes.TRANSACTIONS,
+    active: false,
+    icon: <ArrowLeftRight className='size-[18px]' />,
   },
   {
     title: 'FAQ',
     href: Routes.FAQ,
     active: false,
-    icon: <MessageCircleQuestion className='size-inherit' />,
+    icon: <MessageCircleQuestion className='size-[18px]' />,
   },
   {
     title: 'terms',
     href: Routes.TERMS,
     active: false,
-    icon: <ReceiptText className='size-inherit' />,
+    icon: <ReceiptText className='size-[18px]' />,
   },
 ];
