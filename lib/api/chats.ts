@@ -1,4 +1,4 @@
-import { Chat, Message, Role } from '@/types/chat';
+import { Chat, Decision, Message, Payment, Role } from '@/types/chat';
 import { queryOptions } from '@tanstack/react-query';
 import moment from 'moment';
 
@@ -7,7 +7,17 @@ import { ApiRoutes, jsonApiInstance } from './api-instance';
 
 export const chatsApi = {
   baseQueryKey: 'chats',
-  sendMessage: async ({ message, wallet }: { message: string; wallet: string }) => {
+  sendMessage: async ({
+    message,
+    wallet,
+    transaction_hash = null,
+    payment_type = null,
+  }: {
+    message: string;
+    wallet: string;
+    transaction_hash?: null | string;
+    payment_type?: null | Payment;
+  }) => {
     const timestamp = Date.now();
     const selectedChat = queryClient.getQueryData(
       chatsApi.getSelectedChatQueryOptions({ wallet }).queryKey,
@@ -23,14 +33,14 @@ export const chatsApi = {
             is_approved: false,
             role: Role.USER,
             timestamp,
-            tx_hash: '',
+            tx_hash: null,
           },
           {
             content: '',
             is_approved: false,
             role: Role.SYSTEM,
             timestamp,
-            decision: 'reject',
+            decision: Decision.REJECT,
             isPending: true,
           },
         ],
@@ -44,9 +54,8 @@ export const chatsApi = {
         json: {
           message,
           timestamp: Date.now(),
-          transaction_hash: '',
-          context_data: {},
-          payment_type: 'solana',
+          transaction_hash,
+          payment_type,
         },
       },
     );

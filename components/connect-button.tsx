@@ -1,13 +1,10 @@
 'use client';
 
+import { firstAndLastFour } from '@/lib/first-last-four';
 import { useWalletMultiButton } from '@solana/wallet-adapter-base-ui';
 import { useWalletModal } from '@solana/wallet-adapter-react-ui';
 
 import { Button } from './ui/button';
-
-function firstAndLastFour(s: string): string {
-  return s.length >= 4 ? s.slice(0, 4) + '...' + s.slice(-4) : s;
-}
 
 export const ConnectButton = () => {
   const { setVisible } = useWalletModal();

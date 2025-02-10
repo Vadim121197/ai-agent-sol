@@ -17,7 +17,7 @@ body {
     --popover: 0 0% 100%;
     --popover-foreground: 240 10% 3.9%;
     --primary-foreground: 0 0% 98%;
-    --secondary: 240 4.8% 95.9%;
+
     --secondary-foreground: 240 5.9% 10%;
     --muted: 240 4.8% 95.9%;
     --accent: 240 4.8% 95.9%;
@@ -31,7 +31,7 @@ body {
     --message: 0 0% 19%; /* #313131 */
     --message-border: 210 2% 26%; /* #414243 */
     --ring: 240 10% 3.9%;
-   
+
     --chart-2: 0 100% 50%;
     --chart-3: 0 100% 50%;
     --chart-4: 0 100% 50%;
@@ -41,6 +41,8 @@ body {
     --background: 300 11% 5%; /* #0F0C0F ++ */
     --foreground: 0 0% 100%; /* #FFFFFF ++ */
     --primary: 306 90% 40%; /* #C10AAE */
+    --secondary: 309 16% 17%; /* #332531 */
+    --secondary-foreground: 0 0% 100%; /* #FFFFFF ++ */
     --card: 300 14% 7%; /* #140F14 ++ */
     --card-foreground: 300 9% 87%; /* #E1DBE1 ++ */
     --muted-foreground: 300 0% 53%; /* #888788 */

@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { ConnectButton } from '@/components/connect-button';
 import { Routes } from '@/lib/routes';
 
+import { Balance } from './balance';
 import { Navigation } from './navigation';
 
 export const Header = () => {
@@ -18,7 +19,11 @@ export const Header = () => {
       </Link>
       <div className='flex items-center justify-between flex-1'>
         <Navigation />
-        <ConnectButton />
+        <div className='flex items-center gap-7'>
+          <Balance />
+          <ConnectButton />
+          {/* <WalletMultiButton /> */}
+        </div>
       </div>
     </div>
   );

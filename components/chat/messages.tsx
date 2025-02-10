@@ -9,6 +9,7 @@ import { Calendar } from 'lucide-react';
 import moment from 'moment';
 
 import { Skeleton } from '../ui/skeleton';
+import { Message } from './message';
 
 export const Messages = () => {
   const { selectedChat, isFetched } = useSelectedChat();
@@ -25,7 +26,7 @@ export const Messages = () => {
               </div>
             </div>
             <div className='flex flex-col gap-8'>
-              {i.items.map((message, index) => {
+              {i.items.map((message, index, arr) => {
                 const isUser = message.role === Role.USER;
 
                 return (
@@ -66,9 +67,7 @@ export const Messages = () => {
                           <Skeleton className='h-4 w-[250px]' />
                         </div>
                       ) : (
-                        <p className='text-base font-medium text-card-foreground break-words'>
-                          {message.content}
-                        </p>
+                        <Message message={message} prevMassage={arr[index -1]?.content ?? ''} />
                       )}
                     </div>
                   </div>

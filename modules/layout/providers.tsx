@@ -15,7 +15,7 @@ import {
 import { clusterApiUrl } from '@solana/web3.js';
 import { QueryClientProvider } from '@tanstack/react-query';
 
-export const defaultNetWork = WalletAdapterNetwork.Mainnet;
+export const defaultNetWork = WalletAdapterNetwork.Devnet;
 export const defaultEndpoint = clusterApiUrl(defaultNetWork);
 
 export const Providers = ({
