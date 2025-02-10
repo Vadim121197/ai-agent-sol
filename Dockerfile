@@ -15,11 +15,11 @@ RUN yarn global add pnpm
 
 RUN pnpm install
 
-# ARG NODE
-# ENV NODE=${NODE}
+ARG NODE
+ENV NODE=${NODE}
 
-# COPY ./.env /app/.env
-# ENV NODE_ENV=production
+COPY ./.env /app/.env
+ENV NODE_ENV=production
 
 RUN pnpm build
 
@@ -29,7 +29,7 @@ FROM node:20-alpine3.18  AS runner
 WORKDIR /app
 
 COPY --from=builder /app/next.config.mjs ./
-# COPY --from=builder /app/public ./public
+COPY --from=builder /app/public ./public
 COPY --from=builder /app/package.json ./package.json
 
 # Automatically leverage output traces to reduce image size 
