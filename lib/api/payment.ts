@@ -4,7 +4,7 @@ import { Connection, PublicKey, SystemProgram, Transaction } from '@solana/web3.
 
 import { chatsApi } from './chats';
 
-export const LAMPORTS_TO_SEND = 10_000_000;
+export const LAMPORTS_TO_SEND = 1_000_000;
 
 export const paymentApi = {
   baseQueryKey: 'payment',
