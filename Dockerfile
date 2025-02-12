@@ -18,13 +18,11 @@ RUN pnpm install
 
 ARG NODE
 ENV NODE=${NODE}
+COPY .env.${NODE} .env.production
 
-COPY ./.env.${NODE} ./app/.env.production
 ENV NODE_ENV=production
 
 RUN pnpm build
-
-
 
 FROM node:20-alpine3.18  AS runner
 WORKDIR /app
