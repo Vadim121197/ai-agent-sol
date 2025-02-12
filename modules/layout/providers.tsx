@@ -15,8 +15,7 @@ import {
 import { clusterApiUrl } from '@solana/web3.js';
 import { QueryClientProvider } from '@tanstack/react-query';
 
-export const defaultNetWork = WalletAdapterNetwork.Devnet;
-export const defaultEndpoint = clusterApiUrl(defaultNetWork);
+export const defaultNetWork = WalletAdapterNetwork.Mainnet;
 
 export const Providers = ({
   children,
@@ -25,7 +24,12 @@ export const Providers = ({
 }>) => {
   const [network] = useState<WalletAdapterNetwork>(defaultNetWork);
 
-  const endpoint = useMemo(() => clusterApiUrl(network), [network]);
+  const endpoint = useMemo(() => {
+    if (network === WalletAdapterNetwork.Devnet) {
+      return clusterApiUrl(network);
+    }
+    return `https://mainnet.helius-rpc.com/?api-key=${process.env['NEXT_PUBLIC_SOLANA_RPC_KEY']}`;
+  }, [network]);
 
   const _walletConnect = useMemo(() => {
     const connectWallet: WalletConnectWalletAdapter[] = [];
