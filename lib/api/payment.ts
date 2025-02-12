@@ -4,7 +4,7 @@ import { Connection, PublicKey, SystemProgram, Transaction } from '@solana/web3.
 
 import { chatsApi } from './chats';
 
-export const LAMPORTS_TO_SEND = 1_000_000;
+export const MESSAGE_PRICE = 100_000;
 
 export const paymentApi = {
   baseQueryKey: 'payment',
@@ -25,7 +25,7 @@ export const paymentApi = {
       SystemProgram.transfer({
         fromPubkey,
         toPubkey: new PublicKey(recipient),
-        lamports: LAMPORTS_TO_SEND,
+        lamports: MESSAGE_PRICE,
       }),
     );
 

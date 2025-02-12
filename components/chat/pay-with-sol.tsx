@@ -2,7 +2,7 @@ import { useBalance } from '@/hooks/use-balance';
 import { useToast } from '@/hooks/use-toast';
 import { chatsApi } from '@/lib/api/chats';
 import { infoApi } from '@/lib/api/info';
-import { LAMPORTS_TO_SEND, paymentApi } from '@/lib/api/payment';
+import { MESSAGE_PRICE, paymentApi } from '@/lib/api/payment';
 import { queryClient } from '@/lib/query-client';
 import { useConnection, useWallet } from '@solana/wallet-adapter-react';
 import { LAMPORTS_PER_SOL } from '@solana/web3.js';
@@ -40,7 +40,7 @@ export const PayWithSol = ({ prevMassage }: PayWithSolProps) => {
     },
   });
 
-  const enoughBalance = Number(balance) > LAMPORTS_TO_SEND;
+  const enoughBalance = Number(balance) > MESSAGE_PRICE;
 
   return (
     <Button
@@ -62,7 +62,7 @@ export const PayWithSol = ({ prevMassage }: PayWithSolProps) => {
     >
       <Rocket className='size-4' />
       <p className='text-sm font-semibold'>
-        {enoughBalance ? 'Shill' : `Need ${LAMPORTS_TO_SEND / LAMPORTS_PER_SOL} SOL`}
+        {enoughBalance ? 'Shill' : `Need ${MESSAGE_PRICE / LAMPORTS_PER_SOL} SOL`}
       </p>
     </Button>
   );
