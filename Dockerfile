@@ -15,10 +15,11 @@ RUN yarn global add pnpm
 
 RUN pnpm install
 
+
 ARG NODE
 ENV NODE=${NODE}
 
-COPY ./.env /app/.env
+COPY ./.env.${NODE} ./app/.env.production
 ENV NODE_ENV=production
 
 RUN pnpm build
