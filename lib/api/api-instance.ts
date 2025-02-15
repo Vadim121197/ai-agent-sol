@@ -3,7 +3,10 @@ export const BASE_URL = 'https://api.agent.zpoken.dev/api/v1';
 export enum ApiRoutes {
   CHAT_SELECTED = '/chats/selected',
   STAT_MESSAGE = '/statistics/messages',
+  // local API
+  API_TWEET = '/api/tweet',
 }
+
 class ApiError extends Error {
   constructor(public response: Response) {
     super(`ApiError: ${response.status}`);

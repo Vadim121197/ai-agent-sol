@@ -5,6 +5,7 @@ import { Link } from 'lucide-react';
 
 import { Avatar } from '../ui/avatar';
 import { PayWithSol } from './pay-with-sol';
+import { PayWithX } from './PayWithX'
 
 interface MessageActionProps {
   pool: AuxData;
@@ -51,7 +52,11 @@ export const MessageAction = ({ pool, prevMassage }: MessageActionProps) => {
           </div>
         </div>
       </div>
-      <PayWithSol prevMassage={prevMassage} />
+
+      <div className='flex gap-2'>
+        <PayWithSol prevMassage={prevMassage} />
+        <PayWithX />
+      </div>
     </div>
   );
 };
