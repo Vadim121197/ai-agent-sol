@@ -1,3 +1,5 @@
+'use client';
+
 import { useBalance } from '@/hooks/use-balance';
 
 export const Balance = () => {
@@ -5,7 +7,7 @@ export const Balance = () => {
 
   return (
     <div className='flex items-center gap-2'>
-      <p className='text-sm font-medium'>Balance</p>
+      <p className='text-sm font-semibold'>Balance</p>
       <div className='border border-border py-2 px-[10px] rounded-[20px] text-sm font-semibold'>
         {balance.formatted} SOL
       </div>

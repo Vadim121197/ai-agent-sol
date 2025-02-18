@@ -18,11 +18,14 @@ export const NavigationLink = ({ route }: { route: Route }) => {
         href={route.href}
         className={cn(
           'flex items-center gap-[10px] rounded-[20px] text-[#A8A1A7] px-3 py-1 text-base font-medium',
-          selected && 'bg-[#3B2839] font-semibold text-[#FFF] backdrop-blur-[2px] shadow-[0px_4px_4px_0px_rgba(0,0,0,0.25)]',
+          {
+            'bg-[#3B2839] font-semibold text-[#FFF] backdrop-blur-[2px] shadow-[0px_4px_4px_0px_rgba(0,0,0,0.25)]':
+              selected,
+          },
         )}
       >
-        <div>{route.icon}</div>
-        <p className='text-base font-semibold capitalize'>{route.title}</p>
+        {route.icon}
+        <p className='text-base capitalize'>{route.title}</p>
       </Link>
     );
   }

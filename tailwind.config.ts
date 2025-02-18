@@ -3,7 +3,7 @@ import type { Config } from 'tailwindcss';
 const config: Config = {
   darkMode: ['class'],
   content: [
-    './modules/**/*.{js,ts,jsx,tsx,mdx}',
+    './modules/**/**/*.{js,ts,jsx,tsx,mdx}',
     './components/**/*.{js,ts,jsx,tsx,mdx}',
     './app/**/*.{js,ts,jsx,tsx,mdx}',
   ],
@@ -13,6 +13,7 @@ const config: Config = {
         sans: ['var(--font-urbanist)'],
       },
       colors: {
+        action: 'hsl(var(--action))',
         background: 'hsl(var(--background))',
         foreground: 'hsl(var(--foreground))',
         card: {

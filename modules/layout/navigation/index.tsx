@@ -1,5 +1,4 @@
-import { routes } from '@/lib/routes';
-
+import { routes } from './constants';
 import { NavigationLink } from './navigation-link';
 
 export const Navigation = () => {

@@ -21,7 +21,7 @@ export const Info = () => {
             <Mail className='size-3 stroke-[1.5px]' />
           </div>
           <div className='flex flex-col justify-between'>
-            <p className='text-s font-medium text-card-foreground'>Total Messages Counts</p>
+            <p className='text-sm  font-medium text-card-foreground'>Total Messages Counts</p>
             {isFetched ? (
               <p className='text-xl leading-6 font-semibold text-number'>{data?.message_count}</p>
             ) : (
@@ -34,7 +34,7 @@ export const Info = () => {
             <Banknote className='size-3 stroke-[1.5px]' />
           </div>
           <div className='flex flex-col justify-between'>
-            <p className='text-s font-medium text-card-foreground'>Total SOL paid</p>
+            <p className='text-sm font-medium text-card-foreground'>Total SOL paid</p>
             {isFetched ? (
               <p className='text-xl leading-6 font-semibold text-number'>
                 {data?.shared_pnl.sol ? Number(data.shared_pnl.sol) : '0.00'} SOL
@@ -49,7 +49,7 @@ export const Info = () => {
             <ChartCandlestick className='size-3 stroke-[1.5px]' />
           </div>
           <div className='flex flex-col justify-between'>
-            <p className='text-s font-medium text-card-foreground'>Total Trades</p>
+            <p className='text-sm font-medium text-card-foreground'>Total Trades</p>
             {isFetched ? (
               <p className='text-xl leading-6 font-semibold text-number'>{data?.total_trades}</p>
             ) : (
@@ -62,7 +62,7 @@ export const Info = () => {
             <ChartArea className='size-3 stroke-[1.5px]' />
           </div>
           <div className='flex flex-col justify-between'>
-            <p className='text-s font-medium text-card-foreground'>Average Trade PnL</p>
+            <p className='text-sm font-medium text-card-foreground'>Average Trade PnL</p>
             {isFetched ? (
               <p className='text-xl leading-6 font-semibold text-number'>{data?.avg_pnl}</p>
             ) : (
@@ -75,7 +75,7 @@ export const Info = () => {
             <BadgeDollarSign className='size-3 stroke-[1.5px]' />
           </div>
           <div className='flex flex-col justify-between'>
-            <p className='text-s font-medium text-card-foreground'>Total PnL</p>
+            <p className='text-sm font-medium text-card-foreground'>Total PnL</p>
             {isFetched ? (
               <p className='text-xl leading-6 font-semibold text-number'>{data?.total_pnl}</p>
             ) : (
@@ -88,7 +88,7 @@ export const Info = () => {
             <BadgeDollarSign className='size-3 stroke-[1.5px]' />
           </div>
           <div className='flex flex-col justify-between'>
-            <p className='text-s font-medium text-card-foreground'>Total Profits Shared</p>
+            <p className='text-sm font-medium text-card-foreground'>Total Profits Shared</p>
             {isFetched ? (
               <p className='text-xl leading-6 font-semibold text-number'>
                 ${data?.shared_pnl.usdt ? Number(data.shared_pnl.usdt) : '0.00'}

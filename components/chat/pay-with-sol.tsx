@@ -45,7 +45,6 @@ export const PayWithSol = ({ prevMassage }: PayWithSolProps) => {
   return (
     <Button
       className='flex items-center gap-[10px] min-w-[82px] max-w-[240px]'
-      variant='secondary'
       onClick={() => {
         if (!publicKey) {
           return;
