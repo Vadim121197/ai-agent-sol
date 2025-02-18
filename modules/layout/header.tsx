@@ -25,21 +25,17 @@ const TwitterIcon = () => (
 export const Header = () => {
   return (
     <div className='flex items-center justify-between h-[52px] gap-[44px]'>
-      <Link
-        href={Routes.MAIN}
-        className='flex items-center text-lg leading-6 font-semibold w-[32%]'
-      >
+      <Link href={Routes.MAIN} className='flex items-center text-lg leading-6 font-semibold'>
         Kaja AGENT
       </Link>
-      <div className='flex items-center justify-between flex-1'>
-        <Navigation />
-        <div className='flex items-center'>
-          <Balance />
-          <div className='px-[10px] py-2 border border-border rounded-[20px] bg-card mr-[10px] ml-[26px]'>
-            <TwitterIcon />
-          </div>
-          <ConnectButton />
+      <Navigation />
+
+      <div className='flex items-center'>
+        <Balance />
+        <div className='px-[10px] py-2 border border-border rounded-[20px] bg-card mr-[10px] ml-[26px]'>
+          <TwitterIcon />
         </div>
+        <ConnectButton />
       </div>
     </div>
   );

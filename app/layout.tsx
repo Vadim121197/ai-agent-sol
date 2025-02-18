@@ -25,7 +25,11 @@ export default function RootLayout({
         <AuthProvider>
           <Providers>
             <PrefetchProvider>
-              <div className='flex h-screen w-full flex-col bg-background pt-4  gap-4 pl-6 pr-10 pb-3'>
+              <div className='lg:hidden h-screen w-full flex flex-col gap-2 items-center justify-center'>
+                <h1 className='text-5xl'>Kaja not available for mobile!</h1>
+                <p className='text-xl text-muted-foreground'>We are working on it</p>
+              </div>
+              <div className='h-screen w-full flex-col bg-background pt-4  gap-4 pl-6 pr-10 pb-3 hidden lg:flex'>
                 <Header />
                 <div className='flex flex-1'>
                   <div className='mx-auto flex flex-1 flex-col justify-between px-0'>

@@ -1,27 +1,33 @@
 'use client';
 
-import React from 'react';
+import React, { ReactElement } from 'react';
 
 import { Skeleton } from '@/components/ui/skeleton';
 import { infoApi } from '@/lib/api/info';
+import { cn } from '@/lib/utils';
 import { useQuery } from '@tanstack/react-query';
 import { BadgeDollarSign, Banknote, ChartArea, ChartCandlestick, Mail } from 'lucide-react';
 
-export const Info = () => {
+interface InfoProps {
+  label: ReactElement;
+  className?: string;
+}
+
+export const Info = ({ className, label }: InfoProps) => {
   const { data, isFetched } = useQuery({
     ...infoApi.getDashboardInfo(),
   });
 
   return (
-    <div className='flex gap-1 flex-col'>
-      <p className='text-base font-medium'>Information</p>
-      <div className='grid grid-cols-2 gap-x-5 gap-y-2 w-full'>
+    <div className='flex-1 flex flex-col'>
+      {label}
+      <div className={cn('grid grid-cols-2 gap-x-5 gap-y-2 w-full', className)}>
         <div className='flex items-center gap-2 border border-border rounded-lg p-[18px]'>
           <div className='border border-border rounded-full p-[10px] bg-icon-bg'>
             <Mail className='size-3 stroke-[1.5px]' />
           </div>
           <div className='flex flex-col justify-between'>
-            <p className='text-sm  font-medium text-card-foreground'>Total Messages Counts</p>
+            <p className='text-sm font-medium text-card-foreground'>Total Messages</p>
             {isFetched ? (
               <p className='text-xl leading-6 font-semibold text-number'>{data?.message_count}</p>
             ) : (

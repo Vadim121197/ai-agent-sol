@@ -16,9 +16,12 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select';
-import { defaultSelectPeriod, selectPeriodOptions } from '@/constants';
+import { tradeDefaultSelectPeriod, tradeSelectPeriodOptions } from '@/constants';
 import { infoApi } from '@/lib/api/info';
+import { cn } from '@/lib/utils';
+import { Periods } from '@/types/chart';
 import { useQuery } from '@tanstack/react-query';
+import moment from 'moment';
 import { Bar, BarChart, CartesianGrid, XAxis, YAxis } from 'recharts';
 
 const chartConfig = {
@@ -38,22 +41,22 @@ const chartConfig = {
   },
 } satisfies ChartConfig;
 
-export function TradeChart() {
-  const [period, setPeriod] = useState<string>(defaultSelectPeriod);
+export function TradeChart({ className }: { className?: string }) {
+  const [period, setPeriod] = useState<Periods>(tradeDefaultSelectPeriod);
   const { data } = useQuery({
     ...infoApi.getTrades({ period }),
   });
 
   return (
-    <Card className='h-[224px] pt-5 pl-8 pr-4'>
+    <Card className='pt-4 px-4 pb-2'>
       <CardHeader className='pb-2 flex justify-between flex-row'>
         <CardTitle>Trade</CardTitle>
-        <Select value={period} onValueChange={e => setPeriod(e)}>
+        <Select value={period} onValueChange={(e: Periods) => setPeriod(e)}>
           <SelectTrigger className='w-[120px]'>
             <SelectValue placeholder='Theme' />
           </SelectTrigger>
           <SelectContent>
-            {selectPeriodOptions.map(option => (
+            {tradeSelectPeriodOptions.map(option => (
               <SelectItem key={option.value} value={option.value}>
                 {option.label}
               </SelectItem>
@@ -62,16 +65,29 @@ export function TradeChart() {
         </Select>
       </CardHeader>
       <CardContent>
-        <ChartContainer config={chartConfig} className='h-[168px] w-full'>
-          <BarChart accessibilityLayer data={data} className='h-[168px]'>
+        <ChartContainer config={chartConfig} className={cn('w-full', className)}>
+          <BarChart
+            accessibilityLayer
+            data={data}
+            margin={{ top: 0, left: 0, right: -35, bottom: 0 }}
+          >
             <CartesianGrid stroke='var(--color-grid)' />
             <XAxis
               dataKey='period'
               tickLine={false}
               axisLine={false}
-              tickMargin={0}
-              tickCount={data?.length ?? 1}
+              tickMargin={5}
+              tickCount={7}
               tick={{ stroke: 'var(--color-tick)', strokeWidth: 0.5 }}
+              tickFormatter={(val: string) => {
+                if (period === Periods.WEEK) {
+                  return moment(val).format('D MMM');
+                } else if (period === Periods.MONTH) {
+                  return moment(val).format('D MMM');
+                } else {
+                  return moment(val).format('MMM YYYY');
+                }
+              }}
             />
             <YAxis
               type='number'
@@ -79,10 +95,14 @@ export function TradeChart() {
               axisLine={false}
               tickLine={false}
               tick={{ stroke: 'var(--color-tick)', strokeWidth: 0.5 }}
-              tickMargin={0}
-              tickCount={data?.length ?? 1}
+              tickMargin={5}
+              tickCount={5}
             />
-            <ChartTooltip cursor={false} content={<ChartTooltipContent />} />
+            <ChartTooltip
+              cursor={false}
+              content={<ChartTooltipContent />}
+              labelFormatter={(val: string) => moment(val).format('MMMM Do YYYY')}
+            />
             <Bar dataKey='open_count' fill='var(--color-sol)' radius={4} />
             <Bar dataKey='closed_count' fill='var(--color-usdc)' radius={4} />
           </BarChart>

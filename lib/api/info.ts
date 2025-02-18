@@ -3,7 +3,6 @@ import { ApiRoutes, jsonApiInstance } from '@/lib/api/api-instance';
 import { AgentBalance, Trade } from '@/types/chart';
 import { DashboardStats } from '@/types/stats';
 import { queryOptions } from '@tanstack/react-query';
-import moment from 'moment';
 
 export const infoApi = {
   baseQueryKey: 'info',
@@ -46,13 +45,7 @@ export const infoApi = {
           },
         ),
       placeholderData: prev => prev,
-      select: res =>
-        res.result.map(i => {
-          return {
-            ...i,
-            period: moment(i.period).format('MMMM'),
-          };
-        }),
+      select: res => res.result,
     });
   },
   getAgentBalance: ({ period = defaultSelectPeriod }: { period?: string }) => {
@@ -66,17 +59,7 @@ export const infoApi = {
           },
         ),
       placeholderData: prev => prev,
-      select: res => {
-        return [
-          { period: 'March', total_amount: 0 },
-          ...res.result.map(i => {
-            return {
-              ...i,
-              period: moment(i.period).format('MMMM'),
-            };
-          }),
-        ];
-      },
+      select: res => res.result,
     });
   },
 };
