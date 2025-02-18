@@ -3,6 +3,7 @@ export const BASE_URL = 'https://api.agent.zpoken.dev/api/v1';
 export enum ApiRoutes {
   CHAT_SELECTED = '/chats/selected',
   STAT_MESSAGE = '/statistics/messages',
+  STAT_SHILLING = '/statistics/shilling',
   // local API
   API_TWEET = '/api/tweet',
 }

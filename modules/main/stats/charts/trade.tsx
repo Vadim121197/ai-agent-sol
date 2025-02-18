@@ -7,16 +7,9 @@ import {
   ChartTooltip,
   ChartTooltipContent,
 } from '@/components/ui/chart';
+import { infoApi } from '@/lib/api/info';
+import { useQuery } from '@tanstack/react-query';
 import { Bar, BarChart, CartesianGrid, XAxis, YAxis } from 'recharts';
-
-const chartData = [
-  { month: 'January', sol: 186, usdc: 80 },
-  { month: 'February', sol: 305, usdc: 200 },
-  { month: 'March', sol: 237, usdc: 120 },
-  { month: 'April', sol: 73, usdc: 190 },
-  { month: 'May', sol: 209, usdc: 130 },
-  { month: 'June', sol: 214, usdc: 140 },
-];
 
 const chartConfig = {
   sol: {
@@ -36,6 +29,10 @@ const chartConfig = {
 } satisfies ChartConfig;
 
 export function TradeChart() {
+  const { data } = useQuery({
+    ...infoApi.getTrades(),
+  });
+
   return (
     <Card className='h-[224px] pt-5 pl-8 pr-4'>
       <CardHeader className='pb-2'>
@@ -43,14 +40,14 @@ export function TradeChart() {
       </CardHeader>
       <CardContent>
         <ChartContainer config={chartConfig} className='h-[168px] w-full'>
-          <BarChart accessibilityLayer data={chartData} className='h-[168px]'>
+          <BarChart accessibilityLayer data={data} className='h-[168px]'>
             <CartesianGrid stroke='var(--color-grid)' />
             <XAxis
-              dataKey='month'
+              dataKey='period'
               tickLine={false}
               axisLine={false}
               tickMargin={0}
-              tickCount={chartData.length}
+              tickCount={data?.length ?? 1}
               tick={{ stroke: 'var(--color-tick)', strokeWidth: 0.5 }}
             />
             <YAxis
@@ -60,11 +57,11 @@ export function TradeChart() {
               tickLine={false}
               tick={{ stroke: 'var(--color-tick)', strokeWidth: 0.5 }}
               tickMargin={0}
-              tickCount={chartData.length}
+              tickCount={data?.length ?? 1}
             />
             <ChartTooltip cursor={false} content={<ChartTooltipContent />} />
-            <Bar dataKey='sol' fill='var(--color-sol)' radius={4} />
-            <Bar dataKey='usdc' fill='var(--color-usdc)' radius={4} />
+            <Bar dataKey='open_count' fill='var(--color-sol)' radius={4} />
+            <Bar dataKey='closed_count' fill='var(--color-usdc)' radius={4} />
           </BarChart>
         </ChartContainer>
       </CardContent>

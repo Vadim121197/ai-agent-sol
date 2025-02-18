@@ -7,16 +7,10 @@ import {
   ChartTooltip,
   ChartTooltipContent,
 } from '@/components/ui/chart';
+import { infoApi } from '@/lib/api/info';
+import { useQuery } from '@tanstack/react-query';
 import { CartesianGrid, Line, LineChart, XAxis, YAxis } from 'recharts';
 
-const chartData = [
-  { month: 'January', balance: 0.1 },
-  { month: 'February', balance: 10 },
-  { month: 'March', balance: 25 },
-  { month: 'April', balance: 40 },
-  { month: 'May', balance: 60 },
-  { month: 'June', balance: 100 },
-];
 const chartConfig = {
   balance: {
     label: 'Balance',
@@ -31,6 +25,10 @@ const chartConfig = {
 } satisfies ChartConfig;
 
 export function AgentBalanceChart() {
+  const { data } = useQuery({
+    ...infoApi.getAgentBalance(),
+  });
+
   return (
     <Card className='h-[224px] pt-5 pl-8 pr-4'>
       <CardHeader className='pb-2'>
@@ -38,29 +36,29 @@ export function AgentBalanceChart() {
       </CardHeader>
       <CardContent>
         <ChartContainer config={chartConfig} className='h-[168px] w-full'>
-          <LineChart accessibilityLayer data={chartData} className='h-[168px]'>
+          <LineChart accessibilityLayer data={data} className='h-[168px]'>
             <CartesianGrid stroke='var(--color-grid)' />
             <XAxis
-              dataKey='month'
+              dataKey='period'
               tickLine={false}
               axisLine={false}
               tickMargin={0}
-              tickCount={chartData.length}
+              tickCount={data?.length ?? 1}
               tick={{ stroke: 'var(--color-tick)', strokeWidth: 0.5 }}
             />
             <YAxis
               type='number'
-              dataKey='balance'
+              dataKey='total_amount'
               orientation='right'
               axisLine={false}
               tickLine={false}
               tick={{ stroke: 'var(--color-tick)', strokeWidth: 0.5 }}
               tickMargin={0}
-              tickCount={chartData.length}
+              tickCount={data?.length ?? 1}
             />
             <ChartTooltip cursor={false} content={<ChartTooltipContent />} />
             <Line
-              dataKey='balance'
+              dataKey='total_amount'
               type='monotone'
               stroke='var(--color-balance)'
               strokeWidth={1}

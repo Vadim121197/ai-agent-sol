@@ -1,5 +1,5 @@
 import { AgentBalanceChart } from './charts/agent-balance';
-import { TradeChart } from './charts/trade'
+import { TradeChart } from './charts/trade';
 import { Info } from './info';
 
 export const Stats = () => {

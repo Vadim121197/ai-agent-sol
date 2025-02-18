@@ -1,5 +1,8 @@
 import { ApiRoutes, jsonApiInstance } from '@/lib/api/api-instance';
+import { AgentBalance, Trade } from '@/types/chart';
+import { DashboardStats } from '@/types/stats';
 import { queryOptions } from '@tanstack/react-query';
+import moment from 'moment';
 
 export const infoApi = {
   baseQueryKey: 'info',
@@ -15,6 +18,64 @@ export const infoApi = {
         ),
       select: result => result.total_messages,
       enabled: Boolean(wallet),
+    });
+  },
+  getDashboardInfo: () => {
+    return queryOptions({
+      queryKey: [infoApi.baseQueryKey, 'param'],
+      queryFn: meta =>
+        jsonApiInstance<{ result: DashboardStats }>(
+          `${ApiRoutes.STAT_SHILLING}?action_param=dashboard-info`,
+          {
+            signal: meta.signal,
+          },
+        ),
+
+      select: res => res.result,
+    });
+  },
+  getTrades: () => {
+    return queryOptions({
+      queryKey: [infoApi.baseQueryKey, 'trades'],
+      queryFn: meta =>
+        jsonApiInstance<{ result: Trade[] }>(
+          `${ApiRoutes.STAT_SHILLING}?action_param=trades-by-year`,
+          {
+            signal: meta.signal,
+          },
+        ),
+
+      select: res =>
+        res.result.map(i => {
+          return {
+            ...i,
+            period: moment(i.period).format('MMMM'),
+          };
+        }),
+    });
+  },
+  getAgentBalance: () => {
+    return queryOptions({
+      queryKey: [infoApi.baseQueryKey, 'agent', 'balance'],
+      queryFn: meta =>
+        jsonApiInstance<{ result: AgentBalance[] }>(
+          `${ApiRoutes.STAT_SHILLING}?action_param=agent-balance-by-year`,
+          {
+            signal: meta.signal,
+          },
+        ),
+
+      select: res => {
+        return [
+          { period: 'March', total_amount: 0 },
+          ...res.result.map(i => {
+            return {
+              ...i,
+              period: moment(i.period).format('MMMM'),
+            };
+          }),
+        ];
+      },
     });
   },
 };

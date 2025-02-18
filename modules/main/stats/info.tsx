@@ -1,8 +1,15 @@
 import React from 'react';
 
+import { Skeleton } from '@/components/ui/skeleton';
+import { infoApi } from '@/lib/api/info';
+import { useQuery } from '@tanstack/react-query';
 import { BadgeDollarSign, Banknote, ChartArea, ChartCandlestick, Mail } from 'lucide-react';
 
 export const Info = () => {
+  const { data, isFetched } = useQuery({
+    ...infoApi.getDashboardInfo(),
+  });
+
   return (
     <div className='flex gap-1 flex-col'>
       <p className='text-base font-medium'>Information</p>
@@ -13,7 +20,11 @@ export const Info = () => {
           </div>
           <div className='flex flex-col justify-between'>
             <p className='text-s font-medium text-card-foreground'>Total Messages Counts</p>
-            <p className='text-xl leading-6 font-semibold text-number'>12</p>
+            {isFetched ? (
+              <p className='text-xl leading-6 font-semibold text-number'>{data?.message_count}</p>
+            ) : (
+              <Skeleton className='h-6 w-30' />
+            )}
           </div>
         </div>
         <div className='flex items-center gap-2 border border-border rounded-lg p-[18px]'>
@@ -22,7 +33,13 @@ export const Info = () => {
           </div>
           <div className='flex flex-col justify-between'>
             <p className='text-s font-medium text-card-foreground'>Total SOL paid</p>
-            <p className='text-xl leading-6 font-semibold text-number'>124.5 SOL</p>
+            {isFetched ? (
+              <p className='text-xl leading-6 font-semibold text-number'>
+                {data?.shared_pnl.sol ? Number(data.shared_pnl.sol) : '0.00'} SOL
+              </p>
+            ) : (
+              <Skeleton className='h-6 w-30' />
+            )}
           </div>
         </div>
         <div className='flex items-center gap-2 border border-border rounded-lg p-[18px]'>
@@ -31,7 +48,11 @@ export const Info = () => {
           </div>
           <div className='flex flex-col justify-between'>
             <p className='text-s font-medium text-card-foreground'>Total Trades</p>
-            <p className='text-xl leading-6 font-semibold text-number'>23</p>
+            {isFetched ? (
+              <p className='text-xl leading-6 font-semibold text-number'>{data?.total_trades}</p>
+            ) : (
+              <Skeleton className='h-6 w-30' />
+            )}
           </div>
         </div>
         <div className='flex items-center gap-2 border border-border rounded-lg p-[18px]'>
@@ -40,7 +61,11 @@ export const Info = () => {
           </div>
           <div className='flex flex-col justify-between'>
             <p className='text-s font-medium text-card-foreground'>Average Trade PnL</p>
-            <p className='text-xl leading-6 font-semibold text-number'>123</p>
+            {isFetched ? (
+              <p className='text-xl leading-6 font-semibold text-number'>{data?.avg_pnl}</p>
+            ) : (
+              <Skeleton className='h-6 w-30' />
+            )}
           </div>
         </div>
         <div className='flex items-center gap-2 border border-border rounded-lg p-[18px]'>
@@ -49,7 +74,11 @@ export const Info = () => {
           </div>
           <div className='flex flex-col justify-between'>
             <p className='text-s font-medium text-card-foreground'>Total PnL</p>
-            <p className='text-xl leading-6 font-semibold text-number'>35</p>
+            {isFetched ? (
+              <p className='text-xl leading-6 font-semibold text-number'>{data?.total_pnl}</p>
+            ) : (
+              <Skeleton className='h-6 w-30' />
+            )}
           </div>
         </div>
         <div className='flex items-center gap-2 border border-border rounded-lg p-[18px]'>
@@ -58,7 +87,13 @@ export const Info = () => {
           </div>
           <div className='flex flex-col justify-between'>
             <p className='text-s font-medium text-card-foreground'>Total Profits Shared</p>
-            <p className='text-xl leading-6 font-semibold text-number'>$23.124</p>
+            {isFetched ? (
+              <p className='text-xl leading-6 font-semibold text-number'>
+                ${data?.shared_pnl.usdt ? Number(data.shared_pnl.usdt) : '0.00'}
+              </p>
+            ) : (
+              <Skeleton className='h-6 w-30' />
+            )}
           </div>
         </div>
       </div>

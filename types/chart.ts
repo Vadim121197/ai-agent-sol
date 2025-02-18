@@ -1,6 +1,10 @@
-export interface ChartData {
-  x: number;
-  y: number;
-  z?: number;
-  price: number;
+export interface Trade {
+  closed_count: number;
+  open_count: number;
+  period: string;
+}
+
+export interface AgentBalance {
+  period: string;
+  total_amount: number;
 }
