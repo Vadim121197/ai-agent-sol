@@ -1,5 +1,9 @@
 import type { Config } from 'tailwindcss';
 
+
+
+
+
 const config: Config = {
   darkMode: ['class'],
   content: [
@@ -64,6 +68,7 @@ const config: Config = {
         lg: 'var(--radius)' /* 40px */,
         md: 'calc(var(--radius) - 2px)',
         sm: 'calc(var(--radius) - 8px)' /* 32px */,
+        xs: 'calc(var(--radius) - 16px)' /* 24px */,
       },
     },
   },

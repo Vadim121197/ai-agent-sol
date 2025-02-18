@@ -8,11 +8,7 @@ import { cn } from '@/lib/utils';
 
 import { SendIcon } from './send-icon';
 
-const initialHeight = 56;
-
 export const ChatInput = () => {
-  const [textareaHeight, setTextareaHeight] = useState<number>(initialHeight);
-
   const textAreaRef = useRef<HTMLTextAreaElement | null>(null);
 
   const { setMessage, sendMessage, message, isPending } = useSendMessage();
@@ -22,33 +18,23 @@ export const ChatInput = () => {
   const handleChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
     const target = e.target;
     setMessage(target.value);
-    target.style.height = `${initialHeight}px`;
-    const newHeight = Math.min(target.scrollHeight, 200);
-    target.style.height = `${newHeight}px`;
-    setTextareaHeight(newHeight);
   };
   const disabled = !message.trim() || isPending;
 
   return (
-    <div
+    <label
       // TODO change border to 0.5px
-      className='flex cursor-text rounded-sm  border border-border pr-3 items-center bg-[rgba(15,12,15,0.65)] gap-3 backdrop-blur-[5px]'
+      className='flex cursor-text rounded-sm border p-4 pr-3 items-center bg-[rgba(15,12,15,0.65)] gap-3 backdrop-blur-[5px] duration-[2000ms]'
       tabIndex={-1}
-      onFocus={() => {
-        setFocus(true);
-        textAreaRef.current?.focus();
-      }}
-      onBlur={() => setFocus(false)}
+      htmlFor={'textarea'}
     >
       <Textarea
+        id={'textarea'}
         value={message}
-        style={{
-          height: `${textareaHeight}px`,
-        }}
-        className={cn(
-          'border-none bg-transparent outline-none py-0 resize-none transition-all duration-[2000ms] h-14 min-h-14 max-h-[200px]',
-          textareaHeight > initialHeight ? 'leading-normal' : 'leading-[56px]',
-        )}
+        placeholder='Type your message '
+        className={cn('border-none bg-transparent outline-none py-0 resize-none transition-all ')}
+        minRows={1}
+        maxRows={9}
         onKeyDown={e => {
           if (disabled) {
             return;
@@ -56,18 +42,18 @@ export const ChatInput = () => {
           if (e.key === 'Enter' && !e.shiftKey) {
             e.preventDefault();
             sendMessage();
-            setTextareaHeight(initialHeight);
           }
         }}
         ref={textAreaRef}
         onChange={handleChange}
         onInput={handleChange}
+        onBlur={() => setFocus(false)}
+        onFocus={() => setFocus(true)}
       />
       <button
         onClick={e => {
           e.preventDefault();
           sendMessage();
-          setTextareaHeight(initialHeight);
         }}
         disabled={disabled}
         className={cn(
@@ -77,6 +63,6 @@ export const ChatInput = () => {
       >
         <SendIcon />
       </button>
-    </div>
+    </label>
   );
 };

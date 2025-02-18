@@ -1,5 +1,7 @@
 'use client';
 
+import { useState } from 'react';
+
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import {
   ChartConfig,
@@ -7,6 +9,14 @@ import {
   ChartTooltip,
   ChartTooltipContent,
 } from '@/components/ui/chart';
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select';
+import { defaultSelectPeriod, selectPeriodOptions } from '@/constants';
 import { infoApi } from '@/lib/api/info';
 import { useQuery } from '@tanstack/react-query';
 import { Bar, BarChart, CartesianGrid, XAxis, YAxis } from 'recharts';
@@ -29,14 +39,27 @@ const chartConfig = {
 } satisfies ChartConfig;
 
 export function TradeChart() {
+  const [period, setPeriod] = useState<string>(defaultSelectPeriod);
   const { data } = useQuery({
-    ...infoApi.getTrades(),
+    ...infoApi.getTrades({ period }),
   });
 
   return (
     <Card className='h-[224px] pt-5 pl-8 pr-4'>
-      <CardHeader className='pb-2'>
+      <CardHeader className='pb-2 flex justify-between flex-row'>
         <CardTitle>Trade</CardTitle>
+        <Select value={period} onValueChange={e => setPeriod(e)}>
+          <SelectTrigger className='w-[120px]'>
+            <SelectValue placeholder='Theme' />
+          </SelectTrigger>
+          <SelectContent>
+            {selectPeriodOptions.map(option => (
+              <SelectItem key={option.value} value={option.value}>
+                {option.label}
+              </SelectItem>
+            ))}
+          </SelectContent>
+        </Select>
       </CardHeader>
       <CardContent>
         <ChartContainer config={chartConfig} className='h-[168px] w-full'>
