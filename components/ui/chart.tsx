@@ -168,7 +168,7 @@ const ChartTooltipContent = React.forwardRef<
       <div
         ref={ref}
         className={cn(
-          'grid min-w-[8rem] items-start gap-1.5 rounded-lg border border-border/50 bg-background px-2.5 py-1.5 text-xs shadow-xl',
+          'grid min-w-[8rem] items-start gap-1.5 rounded-xxs border border-border/50 bg-background px-2.5 py-1.5 text-xs shadow-xl',
           className,
         )}
       >
@@ -222,10 +222,10 @@ const ChartTooltipContent = React.forwardRef<
                         nestLabel ? 'items-end' : 'items-center',
                       )}
                     >
-                      <div className='grid gap-1.5'>
+                      <div className='grid gap-1.5 capitalize'>
                         {nestLabel ? tooltipLabel : null}
                         <span className='text-muted-foreground'>
-                          {itemConfig?.label ?? item.name}
+                          {itemConfig?.label ?? item.name?.toString().replaceAll('_', ' ') ?? ''}
                         </span>
                       </div>
                       {item.value && (
