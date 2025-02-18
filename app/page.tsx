@@ -1,4 +1,4 @@
-'use client';
+
 
 import { Chat } from '@/components/chat';
 import { infoApi } from '@/lib/api/info';
