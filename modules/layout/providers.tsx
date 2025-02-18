@@ -13,7 +13,7 @@ import {
   WalletConnectWalletAdapter,
 } from '@solana/wallet-adapter-wallets';
 import { clusterApiUrl } from '@solana/web3.js';
-import { QueryClientProvider } from '@tanstack/react-query';
+import { HydrationBoundary, QueryClientProvider, dehydrate } from '@tanstack/react-query';
 
 export const defaultNetWork = WalletAdapterNetwork.Mainnet;
 
@@ -64,8 +64,10 @@ export const Providers = ({
       <WalletProvider wallets={wallets} autoConnect>
         <WalletModalProvider>
           <QueryClientProvider client={queryClient}>
-            {children}
-            <Toaster />
+            <HydrationBoundary state={dehydrate(queryClient)}>
+              {children}
+              <Toaster />
+            </HydrationBoundary>
           </QueryClientProvider>
         </WalletModalProvider>
       </WalletProvider>
