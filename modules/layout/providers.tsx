@@ -1,7 +1,8 @@
 'use client';
 
-import React, { useMemo, useState } from 'react';
+import React, { Suspense, useMemo, useState } from 'react';
 
+import Loader from '@/components/loader';
 import { Toaster } from '@/components/ui/toaster';
 import { queryClient } from '@/lib/query-client';
 import { WalletAdapterNetwork } from '@solana/wallet-adapter-base';
@@ -64,7 +65,7 @@ export const Providers = ({
       <WalletProvider wallets={wallets} autoConnect>
         <WalletModalProvider>
           <QueryClientProvider client={queryClient}>
-            {children}
+            <Suspense fallback={<Loader />}>{children}</Suspense>
             <Toaster />
           </QueryClientProvider>
         </WalletModalProvider>
