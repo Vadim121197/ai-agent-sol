@@ -33,7 +33,9 @@ export const Header = () => {
       <div className='flex items-center'>
         <Balance />
         <div className='px-[10px] py-2 border border-border rounded-[20px] bg-card mr-[10px] ml-[26px]'>
-          <TwitterIcon />
+          <a href='x.com/kaja_ai' target='_blank'>
+            <TwitterIcon />
+          </a>
         </div>
         <ConnectButton />
       </div>
