@@ -1,7 +1,8 @@
 'use client';
 
-import React, { useMemo, useState } from 'react';
+import React, { Suspense, useMemo, useState } from 'react';
 
+import Loader from '@/components/loader';
 import { Toaster } from '@/components/ui/toaster';
 import { queryClient } from '@/lib/query-client';
 import { WalletAdapterNetwork } from '@solana/wallet-adapter-base';
@@ -13,7 +14,7 @@ import {
   WalletConnectWalletAdapter,
 } from '@solana/wallet-adapter-wallets';
 import { clusterApiUrl } from '@solana/web3.js';
-import { HydrationBoundary, QueryClientProvider, dehydrate } from '@tanstack/react-query';
+import { QueryClientProvider } from '@tanstack/react-query';
 
 export const defaultNetWork = WalletAdapterNetwork.Mainnet;
 
@@ -64,10 +65,8 @@ export const Providers = ({
       <WalletProvider wallets={wallets} autoConnect>
         <WalletModalProvider>
           <QueryClientProvider client={queryClient}>
-            <HydrationBoundary state={dehydrate(queryClient)}>
-              {children}
-              <Toaster />
-            </HydrationBoundary>
+            <Suspense fallback={<Loader />}>{children}</Suspense>
+            <Toaster />
           </QueryClientProvider>
         </WalletModalProvider>
       </WalletProvider>

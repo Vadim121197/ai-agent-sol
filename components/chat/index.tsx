@@ -1,6 +1,9 @@
 'use client';
 
+import React from 'react';
+
 import Welcome from '@/components/chat/welcome';
+import Loader from '@/components/loader';
 import { useSelectedChat } from '@/hooks/use-selected-chat';
 import { cn } from '@/lib/utils';
 
@@ -8,7 +11,7 @@ import { ChatInput } from './chat-input';
 import { Messages } from './messages';
 
 export const Chat = () => {
-  const { selectedChat } = useSelectedChat();
+  const { selectedChat, isLoading } = useSelectedChat();
 
   return (
     <div
@@ -17,8 +20,16 @@ export const Chat = () => {
         { 'bg-[url(/kaja.webp)]': selectedChat?.length },
       )}
     >
-      {selectedChat?.length ? <Messages /> : <Welcome />}
-      <ChatInput />
+      {isLoading ? (
+        <div className='flex justify-center items-center h-full'>
+          <Loader />
+        </div>
+      ) : (
+        <>
+          {selectedChat?.length ? <Messages /> : <Welcome />}
+          <ChatInput />
+        </>
+      )}
     </div>
   );
 };

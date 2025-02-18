@@ -6,11 +6,15 @@ import { chatsApi } from '../lib/api/chats';
 export function useSelectedChat() {
   const wallet = useWallet();
 
-  const { data: selectedChat, isFetched } = useQuery({
+  const {
+    data: selectedChat,
+    isFetched,
+    isLoading,
+  } = useQuery({
     ...chatsApi.getSelectedChatQueryOptions({
       wallet: wallet.publicKey?.toBase58(),
     }),
   });
 
-  return { selectedChat, isFetched };
+  return { selectedChat, isFetched, isLoading };
 }
