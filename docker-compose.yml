@@ -12,3 +12,14 @@ services:
     restart: always
     ports:
       - 3010:3000
+  agent-prod-sol:
+    container_name: agent-prod-sol
+    image: agent-prod-sol:latest
+    build:
+      context: ./
+      dockerfile: ./Dockerfile
+      args:
+        NODE: development
+    restart: always
+    ports:
+      - 9001:3000
