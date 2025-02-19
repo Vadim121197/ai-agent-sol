@@ -3,16 +3,20 @@ import type { Config } from 'tailwindcss';
 const config: Config = {
   darkMode: ['class'],
   content: [
-    './modules/**/*.{js,ts,jsx,tsx,mdx}',
+    './modules/**/**/*.{js,ts,jsx,tsx,mdx}',
     './components/**/*.{js,ts,jsx,tsx,mdx}',
     './app/**/*.{js,ts,jsx,tsx,mdx}',
   ],
   theme: {
     extend: {
+      screens: {
+        xxl: '1400px',
+      },
       fontFamily: {
         sans: ['var(--font-urbanist)'],
       },
       colors: {
+        action: 'hsl(var(--action))',
         background: 'hsl(var(--background))',
         foreground: 'hsl(var(--foreground))',
         card: {
@@ -29,6 +33,7 @@ const config: Config = {
         },
         secondary: {
           DEFAULT: 'hsl(var(--secondary))',
+          light: 'hsl(var(--secondary-light))',
           foreground: 'hsl(var(--secondary-foreground))',
         },
         muted: {
@@ -42,6 +47,9 @@ const config: Config = {
         destructive: {
           DEFAULT: 'hsl(var(--destructive))',
           foreground: 'hsl(var(--destructive-foreground))',
+        },
+        success: {
+          DEFAULT: 'hsl(var(--success))',
         },
         link: { selected: 'hsl(var(--link-selected))', border: 'hsl(var(--link-border))' },
         icon: {
@@ -65,7 +73,7 @@ const config: Config = {
         md: 'calc(var(--radius) - 2px)',
         sm: 'calc(var(--radius) - 8px)' /* 32px */,
         xs: 'calc(var(--radius) - 16px)' /* 24px */,
-        xxs: 'calc(var(--radius) - 32px)' /* 16px */,
+        xxs: 'calc(var(--radius) - 32px)' /* 8px */,
       },
     },
   },

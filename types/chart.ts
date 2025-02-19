@@ -8,3 +8,9 @@ export interface AgentBalance {
   period: string;
   total_amount: number;
 }
+
+export enum Periods {
+  YEAR = 'year',
+  MONTH = 'month',
+  WEEK = 'week',
+}

@@ -1,27 +1,33 @@
 'use client';
 
-import React from 'react';
+import React, { ReactElement } from 'react';
 
 import { Skeleton } from '@/components/ui/skeleton';
 import { infoApi } from '@/lib/api/info';
+import { cn } from '@/lib/utils';
 import { useQuery } from '@tanstack/react-query';
 import { BadgeDollarSign, Banknote, ChartArea, ChartCandlestick, Mail } from 'lucide-react';
 
-export const Info = () => {
+interface InfoProps {
+  label: ReactElement;
+  className?: string;
+}
+
+export const Info = ({ className, label }: InfoProps) => {
   const { data, isFetched } = useQuery({
     ...infoApi.getDashboardInfo(),
   });
 
   return (
-    <div className='flex gap-1 flex-col'>
-      <p className='text-base font-medium'>Information</p>
-      <div className='grid grid-cols-2 gap-x-5 gap-y-2 w-full'>
+    <div className='flex-1 flex flex-col'>
+      {label}
+      <div className={cn('grid grid-cols-2 gap-x-5 gap-y-2 w-full', className)}>
         <div className='flex items-center gap-2 border border-border rounded-lg p-[18px]'>
           <div className='border border-border rounded-full p-[10px] bg-icon-bg'>
             <Mail className='size-3 stroke-[1.5px]' />
           </div>
           <div className='flex flex-col justify-between'>
-            <p className='text-s font-medium text-card-foreground'>Total Messages Counts</p>
+            <p className='text-sm font-medium text-card-foreground'>Total Messages</p>
             {isFetched ? (
               <p className='text-xl leading-6 font-semibold text-number'>{data?.message_count}</p>
             ) : (
@@ -34,7 +40,7 @@ export const Info = () => {
             <Banknote className='size-3 stroke-[1.5px]' />
           </div>
           <div className='flex flex-col justify-between'>
-            <p className='text-s font-medium text-card-foreground'>Total SOL paid</p>
+            <p className='text-sm font-medium text-card-foreground'>Total SOL paid</p>
             {isFetched ? (
               <p className='text-xl leading-6 font-semibold text-number'>
                 {data?.shared_pnl.sol ? Number(data.shared_pnl.sol) : '0.00'} SOL
@@ -49,7 +55,7 @@ export const Info = () => {
             <ChartCandlestick className='size-3 stroke-[1.5px]' />
           </div>
           <div className='flex flex-col justify-between'>
-            <p className='text-s font-medium text-card-foreground'>Total Trades</p>
+            <p className='text-sm font-medium text-card-foreground'>Total Trades</p>
             {isFetched ? (
               <p className='text-xl leading-6 font-semibold text-number'>{data?.total_trades}</p>
             ) : (
@@ -62,7 +68,7 @@ export const Info = () => {
             <ChartArea className='size-3 stroke-[1.5px]' />
           </div>
           <div className='flex flex-col justify-between'>
-            <p className='text-s font-medium text-card-foreground'>Average Trade PnL</p>
+            <p className='text-sm font-medium text-card-foreground'>Average Trade PnL</p>
             {isFetched ? (
               <p className='text-xl leading-6 font-semibold text-number'>{data?.avg_pnl}</p>
             ) : (
@@ -75,7 +81,7 @@ export const Info = () => {
             <BadgeDollarSign className='size-3 stroke-[1.5px]' />
           </div>
           <div className='flex flex-col justify-between'>
-            <p className='text-s font-medium text-card-foreground'>Total PnL</p>
+            <p className='text-sm font-medium text-card-foreground'>Total PnL</p>
             {isFetched ? (
               <p className='text-xl leading-6 font-semibold text-number'>{data?.total_pnl}</p>
             ) : (
@@ -88,7 +94,7 @@ export const Info = () => {
             <BadgeDollarSign className='size-3 stroke-[1.5px]' />
           </div>
           <div className='flex flex-col justify-between'>
-            <p className='text-s font-medium text-card-foreground'>Total Profits Shared</p>
+            <p className='text-sm font-medium text-card-foreground'>Total Profits Shared</p>
             {isFetched ? (
               <p className='text-xl leading-6 font-semibold text-number'>
                 ${data?.shared_pnl.usdt ? Number(data.shared_pnl.usdt) : '0.00'}

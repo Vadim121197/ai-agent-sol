@@ -67,7 +67,7 @@ export const Messages = () => {
                           <Skeleton className='h-4 w-[250px]' />
                         </div>
                       ) : (
-                        <Message message={message} prevMassage={arr[index -1]?.content ?? ''} />
+                        <Message message={message} prevMassage={arr[index - 1]?.content ?? ''} />
                       )}
                     </div>
                   </div>

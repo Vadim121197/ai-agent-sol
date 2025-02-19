@@ -1,28 +1,7 @@
-import { Chat } from '@/components/chat';
-import { infoApi } from '@/lib/api/info';
-import { queryClient } from '@/lib/query-client';
-import { Stats } from '@/modules/main/stats';
-import { HydrationBoundary, dehydrate } from '@tanstack/react-query';
+import { redirect } from 'next/navigation';
 
-export default async function Home() {
-  await queryClient.prefetchQuery({
-    ...infoApi.getAgentBalance({}),
-  });
+import { Routes } from '@/lib/routes';
 
-  await queryClient.prefetchQuery({
-    ...infoApi.getTrades({}),
-  });
-
-  await queryClient.prefetchQuery({
-    ...infoApi.getDashboardInfo(),
-  });
-
-  return (
-    <HydrationBoundary state={dehydrate(queryClient)}>
-      <div className='flex overflow-y-hidden gap-[44px] flex-1'>
-        <Stats />
-        <Chat />
-      </div>
-    </HydrationBoundary>
-  );
+export default function Home() {
+  redirect(Routes.DASHBOARD);
 }

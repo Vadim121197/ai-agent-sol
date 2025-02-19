@@ -18,7 +18,10 @@ import {
 } from '@/components/ui/select';
 import { defaultSelectPeriod, selectPeriodOptions } from '@/constants';
 import { infoApi } from '@/lib/api/info';
+import { cn } from '@/lib/utils';
+import { Periods } from '@/types/chart';
 import { useQuery } from '@tanstack/react-query';
+import moment from 'moment';
 import { CartesianGrid, Line, LineChart, XAxis, YAxis } from 'recharts';
 
 const chartConfig = {
@@ -34,18 +37,18 @@ const chartConfig = {
   },
 } satisfies ChartConfig;
 
-export function AgentBalanceChart() {
-  const [period, setPeriod] = useState<string>(defaultSelectPeriod);
+export function AgentBalanceChart({ className }: { className?: string }) {
+  const [period, setPeriod] = useState<Periods>(defaultSelectPeriod);
 
   const { data } = useQuery({
     ...infoApi.getAgentBalance({ period }),
   });
 
   return (
-    <Card className='h-[224px] pt-5 pl-8 pr-4'>
+    <Card className='pt-4 px-4 pb-2'>
       <CardHeader className='pb-2 flex justify-between flex-row'>
         <CardTitle>Agent balance</CardTitle>
-        <Select value={period} onValueChange={e => setPeriod(e)}>
+        <Select value={period} onValueChange={(e: Periods) => setPeriod(e)}>
           <SelectTrigger className='w-[120px]'>
             <SelectValue placeholder='Theme' />
           </SelectTrigger>
@@ -59,16 +62,30 @@ export function AgentBalanceChart() {
         </Select>
       </CardHeader>
       <CardContent>
-        <ChartContainer config={chartConfig} className='h-[168px] w-full'>
-          <LineChart accessibilityLayer data={data} className='h-[168px]'>
+        <ChartContainer config={chartConfig} className={cn('w-full', className)}>
+          <LineChart
+            margin={{ top: 0, left: 0, right: -15, bottom: 0 }}
+            accessibilityLayer
+            data={data}
+          >
             <CartesianGrid stroke='var(--color-grid)' />
             <XAxis
               dataKey='period'
               tickLine={false}
               axisLine={false}
-              tickMargin={0}
-              tickCount={data?.length ?? 1}
+              tickMargin={5}
+              tickCount={7}
               tick={{ stroke: 'var(--color-tick)', strokeWidth: 0.5 }}
+              tickFormatter={(val: string) => {
+                if (period === Periods.WEEK) {
+                  return moment(val).format('D MMM');
+                } else if (period === Periods.MONTH) {
+                  return moment(val).format('D MMM');
+                } else {
+                  return moment(val).format('MMM YYYY');
+                }
+              }}
+              interval='preserveStartEnd'
             />
             <YAxis
               type='number'
@@ -77,10 +94,20 @@ export function AgentBalanceChart() {
               axisLine={false}
               tickLine={false}
               tick={{ stroke: 'var(--color-tick)', strokeWidth: 0.5 }}
-              tickMargin={0}
-              tickCount={data?.length ?? 1}
+              tickFormatter={(val: number) => {
+                if (val === 0) {
+                  return '0';
+                }
+                return val.toFixed(3);
+              }}
+              tickMargin={5}
+              tickCount={5}
             />
-            <ChartTooltip cursor={false} content={<ChartTooltipContent />} />
+            <ChartTooltip
+              cursor={false}
+              content={<ChartTooltipContent />}
+              labelFormatter={(val: string) => moment(val).format('MMMM Do YYYY')}
+            />
             <Line
               dataKey='total_amount'
               type='monotone'

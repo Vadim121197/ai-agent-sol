@@ -7,8 +7,8 @@ body {
 
 @layer utilities {
     /* .text-balance {
-      text-wrap: balance;
-    } */
+        text-wrap: balance;
+      } */
 }
 
 @layer utilities {
@@ -26,7 +26,6 @@ body {
 
 @layer base {
     :root {
-        --card: 240 4% 10%; /* #18181A */
         --popover: 0 0% 100%;
         --popover-foreground: 240 10% 3.9%;
         --primary-foreground: 0 0% 98%;
@@ -37,12 +36,6 @@ body {
         --accent-foreground: 240 5.9% 10%;
         --destructive: 0 84.2% 60.2%;
         --destructive-foreground: 0 0% 98%;
-        --link-selected: 30 3% 14%; /* #242322 */
-        --link-border: 35 59% 71%; /* #E1BD89 */
-        --input: 0 0% 19%; /* #313131 */
-        --input-border: 210 2% 26%; /* #414243 */
-        --message: 0 0% 19%; /* #313131 */
-        --message-border: 210 2% 26%; /* #414243 */
         --ring: 240 10% 3.9%;
 
         --chart-2: 0 100% 50%;
@@ -56,6 +49,8 @@ body {
         --primary: 306 90% 40%; /* #C10AAE */
         --secondary: 309 16% 17%; /* #332531 */
         --secondary-foreground: 0 0% 100%; /* #FFFFFF ++ */
+        --secondary-light: 307 8% 53%; /* #917F8F ++ */
+        --success: 96 89% 38%; /* #51B211 */
         --card: 300 14% 7%; /* #140F14 ++ */
         --card-foreground: 300 9% 87%; /* #E1DBE1 ++ */
         --muted-foreground: 300 0% 53%; /* #888788 */
@@ -63,7 +58,7 @@ body {
         --icon-bg: 300 14% 7%; /* #140F14 ++ */
         --number: 306 75% 55%; /* #E237D1 */
         --chart-1: 307 100% 58%; /* #FF27E6 */
-
+        --action: 300 13% 9%; /* #1B151B */
         --radius: 2.5rem; /* 40px  ++*/
     }
 

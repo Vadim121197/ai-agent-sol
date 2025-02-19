@@ -16,7 +16,7 @@ export const Chat = () => {
   return (
     <div
       className={cn(
-        'flex flex-col justify-between max-h-screen flex-1  bg-cover bg-bottom bg-no-repeat bg-[rgba(20,15,20,0.75)] backdrop-blur-[4px] bg-blend-overlay rounded-lg border px-5 pb-6',
+        'flex flex-col justify-between max-h-screen flex-1 bg-cover bg-bottom bg-no-repeat bg-[rgba(20,15,20,0.75)] backdrop-blur-[4px] bg-blend-overlay rounded-lg border px-5 pb-6',
         { 'bg-[url(/kaja.webp)]': selectedChat?.length },
       )}
     >

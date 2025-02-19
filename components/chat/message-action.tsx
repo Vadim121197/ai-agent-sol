@@ -13,7 +13,7 @@ interface MessageActionProps {
 
 export const MessageAction = ({ pool, prevMassage }: MessageActionProps) => {
   return (
-    <div className='flex flex-col gap-3 rounded-[20px] border border-border bg-card p-4'>
+    <div className='flex flex-col gap-3 rounded-[20px] bg-action p-4'>
       <div className='flex items-center gap-3'>
         <Avatar className='size-[26px]'>
           {pool.logoURI && <AvatarImage src={pool.logoURI} />}
@@ -22,21 +22,24 @@ export const MessageAction = ({ pool, prevMassage }: MessageActionProps) => {
         <p className='text-base font-medium'>{pool.symbol}</p>
       </div>
       <div className='flex gap-10 items-center pb-2'>
-        <div className='flex flex-col gap-[2px]'>
+        <div className='flex flex-col gap-1'>
           <p className='text-sm font-medium text-card-foreground'>Token Price</p>
           <div className='flex items-center gap-1'>
-            <div className='border border-border rounded-[20px] py-[2px] px-[6px]'>
+            <div className='border border-secondary rounded-[20px] py-[2px] px-2 text-sm font-medium'>
               {pool.price} SOL
             </div>
           </div>
         </div>
-        <div className='flex flex-col gap-[2px]'>
+        <div className='flex flex-col gap-1'>
           <p className='text-sm font-medium text-card-foreground'>Pool Liquidity</p>
           <div className='flex items-center gap-1'>
-            <div className='border border-border rounded-[20px] py-[2px] px-[6px]'>${pool.tvl}</div>
+            <div className='border border-secondary rounded-[20px] py-[2px] px-2 text-sm font-medium'>
+              ${pool.tvl}
+            </div>
           </div>
         </div>
-        <div className='flex flex-col gap-[2px]'>
+
+        <div className='flex flex-col gap-1'>
           <p className='text-sm font-medium text-card-foreground'>Raydium pool</p>
           <div className='flex items-center gap-[10px]'>
             <Link className='size-3' />
