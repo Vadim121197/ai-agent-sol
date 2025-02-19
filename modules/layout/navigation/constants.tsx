@@ -23,7 +23,7 @@ export const routes: Route[] = [
   {
     title: 'about me',
     href: Routes.ABOUT,
-    active: false,
+    active: true,
     icon: <Info className='size-[18px]' />,
   },
   {

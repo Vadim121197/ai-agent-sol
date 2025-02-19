@@ -9,6 +9,9 @@ const config: Config = {
   ],
   theme: {
     extend: {
+      screens: {
+        xxl: '1400px',
+      },
       fontFamily: {
         sans: ['var(--font-urbanist)'],
       },
@@ -30,6 +33,7 @@ const config: Config = {
         },
         secondary: {
           DEFAULT: 'hsl(var(--secondary))',
+          light: 'hsl(var(--secondary-light))',
           foreground: 'hsl(var(--secondary-foreground))',
         },
         muted: {

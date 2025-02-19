@@ -49,6 +49,7 @@ body {
         --primary: 306 90% 40%; /* #C10AAE */
         --secondary: 309 16% 17%; /* #332531 */
         --secondary-foreground: 0 0% 100%; /* #FFFFFF ++ */
+        --secondary-light: 307 8% 53%; /* #917F8F ++ */
         --success: 96 89% 38%; /* #51B211 */
         --card: 300 14% 7%; /* #140F14 ++ */
         --card-foreground: 300 9% 87%; /* #E1DBE1 ++ */

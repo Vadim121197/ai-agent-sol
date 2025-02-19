@@ -6,7 +6,7 @@ import { Routes } from '@/lib/routes';
 import { Balance } from './balance';
 import { Navigation } from './navigation';
 
-const TwitterIcon = () => (
+export const TwitterIcon = () => (
   <svg xmlns='http://www.w3.org/2000/svg' width='17' height='16' viewBox='0 0 17 16' fill='none'>
     <g clipPath='url(#clip0_125_3551)'>
       <path
