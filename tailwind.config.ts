@@ -44,6 +44,9 @@ const config: Config = {
           DEFAULT: 'hsl(var(--destructive))',
           foreground: 'hsl(var(--destructive-foreground))',
         },
+        success: {
+          DEFAULT: 'hsl(var(--success))',
+        },
         link: { selected: 'hsl(var(--link-selected))', border: 'hsl(var(--link-border))' },
         icon: {
           bg: 'hsl(var(--icon-bg))',
@@ -66,7 +69,7 @@ const config: Config = {
         md: 'calc(var(--radius) - 2px)',
         sm: 'calc(var(--radius) - 8px)' /* 32px */,
         xs: 'calc(var(--radius) - 16px)' /* 24px */,
-        xxs: 'calc(var(--radius) - 32px)' /* 16px */,
+        xxs: 'calc(var(--radius) - 32px)' /* 8px */,
       },
     },
   },

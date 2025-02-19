@@ -12,12 +12,29 @@ function getData(): Payment[] {
       amount: 100,
       status: 'pending',
       email: 'm@example.com',
+
+      from: '1 SOL',
+      to: '1M ASSAI',
+      price: 0.000521,
+      wallet: '0x1234234523453245324',
+      txn: 'gdsfgdsfgsdfgdfgdsfgdsfgsdf',
+      date: '17.02.2025',
+      type: 'Approve Shill & Buy',
     },
     {
       id: '72ased52f',
       amount: 1120,
-      status: 'pending',
+      status: 'failed',
       email: 'masd@example.com',
+
+      from: '1 SOL',
+      to: '1M ASSAI',
+      price: 0.000521,
+      wallet: '0x1234234523453245324',
+      date: '16.02.2025',
+      type: 'Reject',
+      token: 'ASSAI',
+      dex: 'Raydium',
     },
     // ...
   ];

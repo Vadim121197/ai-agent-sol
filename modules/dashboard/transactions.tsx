@@ -87,10 +87,10 @@ export function Transactions<TData, TValue>({ columns, data }: DataTableProps<TD
                 <TableRow
                   key={row.id}
                   data-state={row.getIsSelected() && 'selected'}
-                  className='h-20'
+                  className='h-20 odd:bg-card'
                 >
                   {row.getVisibleCells().map(cell => (
-                    <TableCell key={cell.id}>
+                    <TableCell key={cell.id} className='align-top py-3.5 px-2.5'>
                       {flexRender(cell.column.columnDef.cell, cell.getContext())}
                     </TableCell>
                   ))}
